@@ -1,4 +1,29 @@
-.welcome-card img {
-  max-height: 35vh;
-  overflow: hidden;
+ion-content {
+  background-color: #fdc200fd;
+}
+
+ion-card-title h1 {
+  font-weight: bold;
+  color: black;
+}
+
+ion-card {
+  background-color: #a70808ef;
+}
+
+.toolbar-background {
+  background-color: blue;
+}
+
+.list_item {
+  background: rgb(255, 255, 255);
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  padding-top: 0.1em;
+  size: 2em;
+  --background: rgb(222, 238, 130);
+}
+
+ion-list-header h2 {
+  text-decoration-color: rgb(238, 85, 85);
 }

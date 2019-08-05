@@ -1,0 +1,23 @@
+ .swiper-slide {
+    display: block;
+  }
+  ion-slide > h1 {
+    margin-top: 2.8rem;
+    font-weight: bold;
+  }
+  ion-slide > img {
+    max-height: 50%;
+    max-width: 60%;
+    margin: 36px 0;
+  }
+  .logo2 {
+    max-height: 40% !important;
+    max-width: 40% !important;
+    margin: 25px 0 !important;
+  }
+  .buttons {
+    padding-top: 60% !important;
+  }
+  ion-icon {
+    padding-right: 0.5em;
+  }
