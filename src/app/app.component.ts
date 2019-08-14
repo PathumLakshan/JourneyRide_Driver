@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent {
+
   public appPages = [
     {
       title: 'Home',
@@ -18,9 +19,14 @@ export class AppComponent {
       icon: 'home'
     },
     {
-      title: 'List',
-      url: '/list',
+      title: 'Schedue',
+      url: '/home/tab2',
       icon: 'list'
+    },
+    {
+      title: 'Location',
+      url: '/home/tab3',
+      icon: 'contacts'
     }
   ];
 

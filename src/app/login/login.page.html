@@ -1,22 +1,28 @@
  <ion-content fullscreen padding scroll-y="false">
       <ion-slides>
 
+        <!-- Starting Slide-->
         <ion-slide>
-          <img alt="LOGO" src="../../assets/jeep.png"/>
-          <h1>Welcome to Jorney Ride Drivers</h1>
+          <img alt="LOGO" src="../../assets/icon/logo2ldpi.png"/>
+          <h1>Welcome to Journey Ride Drivers</h1>
           <p>The <b>Journey Ride</b> is a safest way to travel.</p>
+          <h6>Slide the Screen to Login</h6>
         </ion-slide>
 
+        <!--Login Slide-->
         <ion-slide>
-          <img alt="LOGO" class="logo2" src="../../assets/login.png"/>
-          <h1>Get Started with Signing Up with Google</h1>
-
-          <div class="buttons">
-            <ion-button expand="block" color="dark" >
-            <ion-icon name="logo-google"></ion-icon> Sign Up with Google</ion-button>
-            <ion-button expand="block" color="dark" routerLink="/home"> Home </ion-button>
+          <div class="loggin">
+          <h3>Enter the Registration Code here to Login</h3>
+          <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)">
+            <ion-item>
+              <ion-label position="floating">Registration Code</ion-label>
+              <ion-input color="dark" type="text" formControlName="reg_code"></ion-input>
+            </ion-item>
+            <ion-button block small color="dark" type="submit" [disabled]="!loginForm.valid"> Login </ion-button>
+            <ion-button block small round dark routerLink="/"> Home </ion-button>
+          </form>
           </div>
-
         </ion-slide>
+
       </ion-slides>
     </ion-content>

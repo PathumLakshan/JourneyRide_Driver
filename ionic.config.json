@@ -1,5 +1,7 @@
 {
   "name": "JourneyRide_Driver",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

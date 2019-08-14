@@ -1,0 +1,40 @@
+<!-- Side navigation Menu -->
+<ion-buttons slot="start">
+  <ion-menu-button></ion-menu-button>
+</ion-buttons>
+<!-- End side navigation Menu -->
+
+
+<ion-content>
+
+<ion-list>
+        <ion-list-header>
+          Recent Notifications from Passengers
+        </ion-list-header>
+
+        <ion-item>
+          <ion-avatar slot="start">
+            <img src="../../../../assets/login.jpg">
+          </ion-avatar>
+          <ion-label>
+            <h2>Finn</h2>
+            <h3>Kandy to Colombo</h3>
+            <h2>Budget: 40000</h2>
+          </ion-label>
+          <ion-button color="dark" (click)="onClick()"> Assign Driver </ion-button>
+        </ion-item>
+</ion-list>
+<ion-button expand="block" color="dark" (click)="loadData()">LOAD</ion-button>
+
+<ion-item>
+  <ion-label *ngFor="let item of result">
+    <h4>{{item.country}}</h4>
+    <h4>{{item.createdDate}}</h4>
+    <h4>{{item.email}}</h4>
+    <h4>{{item.passengerName}}</h4>
+    <h4>{{item.telNo}}</h4>
+  </ion-label>
+
+</ion-item>
+
+</ion-content>

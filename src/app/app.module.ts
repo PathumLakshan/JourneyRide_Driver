@@ -8,8 +8,12 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { TripDetailsModalPageModule } from './home/trip-details-modal/trip-details-modal.module';
+import { TripDetailsModalPageModule } from './public/trip-details-modal/trip-details-modal.module';
 
+import { HttpClientModule } from '@angular/common/http';
+
+import { GoogleMaps } from '@ionic-native/google-maps';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -17,12 +21,15 @@ import { TripDetailsModalPageModule } from './home/trip-details-modal/trip-detai
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
+    HttpClientModule,
     TripDetailsModalPageModule
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    GoogleMaps,
+    Geolocation
   ],
   bootstrap: [AppComponent]
 })
