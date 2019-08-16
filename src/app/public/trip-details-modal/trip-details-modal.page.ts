@@ -31,6 +31,10 @@ export class TripDetailsModalPage implements OnInit {
   budget: any;
   onClosedData: string;
 
+  // Driver or company employee
+  // if drier with one vehicle isDriver = true else false
+  isDriver = true;
+
   constructor(
     private modalController: ModalController,
     private navParams: NavParams

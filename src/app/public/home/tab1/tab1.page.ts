@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { TripDetailsModalPage } from '../../../public/trip-details-modal/trip-details-modal.page';
 
+
 @Component({
   selector: 'app-tab1',
   templateUrl: './tab1.page.html',

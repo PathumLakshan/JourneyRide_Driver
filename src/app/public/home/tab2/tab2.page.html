@@ -6,35 +6,32 @@
 
 
 <ion-content>
-
-<ion-list>
-        <ion-list-header>
-          Recent Notifications from Passengers
-        </ion-list-header>
-
-        <ion-item>
-          <ion-avatar slot="start">
-            <img src="../../../../assets/login.jpg">
-          </ion-avatar>
+  <ion-list>
+    <ion-list-header>Recent Notifications from Passengers</ion-list-header>
+      <ion-item *ngFor="let psg of passengerNotes.passengernote">
+        <ion-avatar slot="start"><img src={{psg.prof_pic}}></ion-avatar>
           <ion-label>
-            <h2>Finn</h2>
-            <h3>Kandy to Colombo</h3>
-            <h2>Budget: 40000</h2>
+            <h2>{{psg.psgName}}</h2>
+            <h3>{{psg.from}} TO {{psg.destination}}</h3>
+            <h2>{{psg.noofpsg}}</h2>
           </ion-label>
-          <ion-button color="dark" (click)="onClick()"> Assign Driver </ion-button>
-        </ion-item>
-</ion-list>
-<ion-button expand="block" color="dark" (click)="loadData()">LOAD</ion-button>
+      </ion-item>
+      <ion-button color="dark" (click)="onClick()"> Assign Driver </ion-button>
+  </ion-list>
+  
+  <ion-button expand="block" color="dark" (click)="getDataNativeHttp()">LOAD</ion-button>
+  <ion-button expand="block" color="dark" (click)="loadShit()">SHITLOAD</ion-button>
 
-<ion-item>
-  <ion-label *ngFor="let item of result">
-    <h4>{{item.country}}</h4>
-    <h4>{{item.createdDate}}</h4>
-    <h4>{{item.email}}</h4>
-    <h4>{{item.passengerName}}</h4>
-    <h4>{{item.telNo}}</h4>
-  </ion-label>
+  <ion-item>
+  THis is the -> {{var2}}
+    <ion-label *ngFor="let item of result">
+      <h4>{{item.country}}</h4>
+      <h4>{{item.createdDate}}</h4>
+      <h4>{{item.email}}</h4>
+      <h4>{{item.passengerName}}</h4>
+      <h4>{{item.telNo}}</h4>
+    </ion-label>
 
-</ion-item>
+  </ion-item>
 
 </ion-content>

@@ -7,7 +7,6 @@ export const environment = {
   url: 'https://finalprojectjr.pythonanywhere.com',
   header: 'q#x14bp%od6dpxf)4h#w2_p#f@z^6q33^dgfymes3fxv59@fg_'
 };
-
 // q#x14bp%od6dpxf)4h#w2_p#f@z^6q33^dgfymes3fxv59@fg_
 /*
  * For easier debugging in development mode, you can import the following file

@@ -12,14 +12,12 @@
         <!--Login Slide-->
         <ion-slide>
           <div class="loggin">
-          <h3>Enter the Registration Code here to Login</h3>
+          <h4>Enter the Registration Code here to Login</h4>
           <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)">
-            <ion-item>
-              <ion-label position="floating">Registration Code</ion-label>
-              <ion-input color="dark" type="text" formControlName="reg_code"></ion-input>
-            </ion-item>
+            <div class="textbox">
+              <ion-input color="dark" type="text" formControlName="reg_code" placeholder="Registration Code"></ion-input>
+            </div>
             <ion-button block small color="dark" type="submit" [disabled]="!loginForm.valid"> Login </ion-button>
-            <ion-button block small round dark routerLink="/"> Home </ion-button>
           </form>
           </div>
         </ion-slide>

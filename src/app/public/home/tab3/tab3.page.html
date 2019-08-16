@@ -6,7 +6,7 @@
 
 <!--
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbaapr>
     <ion-title>Passenger's Location</ion-title>
   </ion-toolbar>
   <ion-button (click)="currentPlace()" shape="round" fill="outline">
@@ -18,5 +18,10 @@
 
 
 <ion-content>
+<ion-fab vertical="top" horizontal="end" slot="fixed" (click)="currentPlace()">
+    <ion-fab-button>
+      <ion-icon name="pin"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
   <div id="map" style="height: 100%;"></div>
 </ion-content>

@@ -25,6 +25,7 @@ export class Tab3Page implements OnInit {
 
   ngOnInit() {
     this.platform.ready().then( () => {
+      this.currentPlace();
       this.loadMap();
     });
   }
@@ -52,7 +53,7 @@ export class Tab3Page implements OnInit {
 
     map.one( GoogleMapsEvent.MAP_READY ).then( ( data: any ) => {
 
-      const coordinates: LatLng = new LatLng( 36.7783, 119.4179 );
+      const coordinates: LatLng = new LatLng( this.myLat, this.myLong );
 
       const position = {
         target: coordinates,
