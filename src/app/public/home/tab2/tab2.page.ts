@@ -7,6 +7,7 @@ import { HTTP } from '@ionic-native/http/ngx';
 import { Location } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 
+
 // rxjs
 import { from } from 'rxjs';
 import { finalize } from 'rxjs/operators';
@@ -45,14 +46,16 @@ export class Tab2Page implements OnInit {
     ]
   };
 
-  URL    = environment.url + '/pass/list_passenger';
+  URL    =  environment.url + '/pass/list_passenger';
   HEADER = environment.header;
 
   result: any = [];
   var2: any;
 
   constructor(private nativeHttp: HTTP,
-              private http: HttpClient, private location: Location, private loadingCtrl: LoadingController) { }
+              private http: HttpClient,
+              private location: Location,
+              private loadingController: LoadingController) { }
 
   ngOnInit() {
   }
@@ -61,31 +64,36 @@ export class Tab2Page implements OnInit {
     this.location.back();
   }
 
-  loadShit() {
-    return this.http.get(this.URL).pipe().subscribe(
-      (res) => {alert(res[0].data); console.log(res[0][`passengerName`])},
-      (err) => { alert(err);}
-    )
+  async loadShit() {
+    const loading = await this.loadingController.create({
+      spinner: 'circles',
+      message: 'Please wait...',
+      translucent: true,
+      cssClass: 'custom-class custom-loading'
+    });
+    await loading.present();
+
+    return this.http.get(this.URL).pipe(
+      finalize(() => loading.dismiss())
+    ).subscribe(
+      (res) => {
+        this.var2 = res[1].email;
+      },
+      (err) => { alert(err.message);}
+    );
   }
 
-
   async getDataNativeHttp() {
-    const loading = await this.loadingCtrl.create();
+    const loading = await this.loadingController.create();
     await loading.present();
- 
-    // Returns a promise, need to convert with of() to Observable (if want)!
-    // tslint:disable-next-line:object-literal-key-quotes
-    from(this.nativeHttp.get(this.URL, {'Authorization': this.HEADER}, {'Content-Type': 'application/json'})).pipe(
+    from(this.nativeHttp.get(this.URL, {}, {})).pipe(
       finalize(() => loading.dismiss())
-    ).subscribe((data) => {
-      this.var2 = data[0][`passengerName`];
-      alert(data[0][`passengerName`]);
-      // const parsed = JSON.parse(data.data);
-      // this.result = parsed.results;
-      // alert('result1' + this.result[0]);
-    }, err => {
-      console.log('Native Call error: ', err);
-    });
+    ).subscribe(
+      data => { this.var2 = data[0].email,
+                alert(data[0].email);
+              },
+     err => { console.log('Native Call error: ', err); }
+     );
   }
 
 }

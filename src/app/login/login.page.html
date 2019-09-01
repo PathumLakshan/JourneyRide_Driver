@@ -1,26 +1,38 @@
- <ion-content fullscreen padding scroll-y="false">
-      <ion-slides>
-
-        <!-- Starting Slide-->
-        <ion-slide>
-          <img alt="LOGO" src="../../assets/icon/logo2ldpi.png"/>
-          <h1>Welcome to Journey Ride Drivers</h1>
-          <p>The <b>Journey Ride</b> is a safest way to travel.</p>
-          <h6>Slide the Screen to Login</h6>
-        </ion-slide>
-
-        <!--Login Slide-->
-        <ion-slide>
-          <div class="loggin">
-          <h4>Enter the Registration Code here to Login</h4>
-          <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)">
-            <div class="textbox">
-              <ion-input color="dark" type="text" formControlName="reg_code" placeholder="Registration Code"></ion-input>
-            </div>
-            <ion-button block small color="dark" type="submit" [disabled]="!loginForm.valid"> Login </ion-button>
-          </form>
+<ion-content fullscreen padding scroll-y="false">
+  <ion-slides>
+    <!-- Starting Slide-->
+    <ion-slide>
+      <ion-grid>
+        <ion-row>
+         <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+          <div padding>
+            <img alt="LOGO" src="../../assets/icon/logo2ldpi.png"/>
+            <h1>Welcome to Journey Ride</h1>
+            <p>The <b>Journey Ride</b> is a safest way to travel.</p>
+            <h6>Slide the Screen to Login</h6>
           </div>
-        </ion-slide>
+         </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-slide>
 
-      </ion-slides>
-    </ion-content>
+<!--Login Slide-->
+    <ion-slide>
+      <ion-grid>
+        <ion-row>
+         <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+          <div padding>
+            <h4>Enter the Registration Code here to Login</h4>
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)">
+              <ion-item>
+                <ion-input color="dark" type="text" formControlName="reg_code" placeholder="Registration Code"></ion-input>
+              </ion-item>
+              <ion-button expand="block" color="medium" type="submit" [disabled]="!loginForm.valid"> Login </ion-button>
+            </form>
+          </div>
+         </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-slide>
+  </ion-slides>
+</ion-content>

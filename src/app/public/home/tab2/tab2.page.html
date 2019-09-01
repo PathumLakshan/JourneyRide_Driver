@@ -11,19 +11,16 @@
       <ion-item *ngFor="let psg of passengerNotes.passengernote">
         <ion-avatar slot="start"><img src={{psg.prof_pic}}></ion-avatar>
           <ion-label>
-            <h2>{{psg.psgName}}</h2>
-            <h3>{{psg.from}} TO {{psg.destination}}</h3>
-            <h2>{{psg.noofpsg}}</h2>
+            <h5>Passenger Name:</h5><h4>{{psg.psgName}}</h4>
+            <h5>Route:</h5><h4> {{psg.from}} To {{psg.destination}}</h4>
+            <h5>No of Passengers:</h5><h4> {{psg.noofpsg}}</h4>
           </ion-label>
       </ion-item>
-      <ion-button color="dark" (click)="onClick()"> Assign Driver </ion-button>
   </ion-list>
   
-  <ion-button expand="block" color="dark" (click)="getDataNativeHttp()">LOAD</ion-button>
-  <ion-button expand="block" color="dark" (click)="loadShit()">SHITLOAD</ion-button>
+  
 
   <ion-item>
-  THis is the -> {{var2}}
     <ion-label *ngFor="let item of result">
       <h4>{{item.country}}</h4>
       <h4>{{item.createdDate}}</h4>
@@ -31,7 +28,6 @@
       <h4>{{item.passengerName}}</h4>
       <h4>{{item.telNo}}</h4>
     </ion-label>
-
   </ion-item>
 
 </ion-content>

@@ -5,14 +5,20 @@
 <!-- End side navigation Menu -->
 
 <ion-content>
+ 
+    <div class="home-list" padding *ngFor="let item of tripdetails.trip" (click)="presentModal(item.tripid)">
+      <h4 class="list-items">
+        <b>
+          <p>{{ item.trip_from }} To {{ item.trip_to }}</p>
+          <p>{{ item.date_from }} to {{ item.date_to }}</p>
+        </b>
+      </h4> 
+      <ion-item-divider color="secondary">
+  <ion-label>
+    Secondary Item Divider
+  </ion-label>
+</ion-item-divider>
+    </div>
 
-    <ion-item *ngFor="let item of tripdetails.trip" (click)="presentModal(item.tripid)">
-        <div class="home-list">
-          <h4 class="list-items"><b>
-            <p>{{ item.trip_from }} To {{ item.trip_to }}</p>
-            <p>{{ item.date_from }} to {{ item.date_to }}</p>
-          </b></h4> 
-        </div>
-    </ion-item>
 
 </ion-content>

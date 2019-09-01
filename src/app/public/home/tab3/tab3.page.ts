@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import {
   GoogleMaps,
@@ -6,7 +6,9 @@ import {
   GoogleMapsEvent,
   LatLng,
   MarkerOptions,
-  Marker
+  Marker,
+  LocationService,
+  GoogleMapOptions
 } from '@ionic-native/google-maps';
 
 import { Platform, NavController } from '@ionic/angular';
@@ -18,27 +20,33 @@ import { Platform, NavController } from '@ionic/angular';
 })
 
 export class Tab3Page implements OnInit {
-  myLat: number;
-  myLong: number;
 
-  constructor(public platform: Platform, public nav: NavController, private geolocation: Geolocation) { }
+  @ViewChild('map', { static: false }) mapElement: ElementRef;
+  map: any;
+  LatLang: any;
+  marker: any;
+  myLat: any;
+  myLong: any;
 
+
+
+  constructor(
+    private geolocation: Geolocation,
+    public platform: Platform,
+    public nav: NavController) {
+  }
   ngOnInit() {
+    this.currentPlace();
     this.platform.ready().then( () => {
-      this.currentPlace();
       this.loadMap();
     });
   }
 
   currentPlace() {
-
     this.geolocation.getCurrentPosition().then((resp) => {
 
       this.myLat = resp.coords.latitude;
       this.myLong = resp.coords.longitude;
-      this.platform.ready().then( () => {
-        this.loadMap();
-      });
       console.log(this.myLat);
       console.log(this.myLong);
 
@@ -49,29 +57,35 @@ export class Tab3Page implements OnInit {
   }
 
   loadMap() {
-    const map = GoogleMaps.create( 'map' );
+    const mapOptions: GoogleMapOptions = {
+      controls: {
+        myLocationButton: true
+      },
+    }
 
-    map.one( GoogleMapsEvent.MAP_READY ).then( ( data: any ) => {
-
+    const map = GoogleMaps.create( 'map', mapOptions );
+    map.one( GoogleMapsEvent.MAP_READY )
+    .then( ( data: any ) => {
       const coordinates: LatLng = new LatLng( this.myLat, this.myLong );
 
       const position = {
         target: coordinates,
-        zoom: 14
+        zoom: 15
       };
-
-      map.animateCamera( position );
+      
+      map.animateCamera(position);
 
       const markerOptions: MarkerOptions = {
         position: coordinates,
-        title: 'Hello California'
+        title: 'Your are here !',
+        center: coordinates
       };
 
       const marker = map.addMarker( markerOptions )
       .then( ( marker: Marker ) => {
         marker.showInfoWindow();
       });
-    })
+    });
   }
 
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, NavParams } from '@ionic/angular';
-import { Url } from 'url';
+import { NavController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-trip-details-modal',
@@ -33,11 +34,12 @@ export class TripDetailsModalPage implements OnInit {
 
   // Driver or company employee
   // if drier with one vehicle isDriver = true else false
-  isDriver = true;
+  isDriver = false;
 
   constructor(
     private modalController: ModalController,
-    private navParams: NavParams
+    private navParams: NavParams,
+    private navCtrl: NavController
   ) { }
 
   ngOnInit() {
@@ -66,6 +68,11 @@ export class TripDetailsModalPage implements OnInit {
   sendbudget() {
     // send the estimated budget to Passenger
     console.log(this.budget);
+  }
+
+  navBack() {
+    alert('a');
+    this.navCtrl.navigateBack('/home/tab1');
   }
 
 }
