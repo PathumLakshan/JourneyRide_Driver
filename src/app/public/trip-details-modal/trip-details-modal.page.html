@@ -1,53 +1,49 @@
 
- <ion-header translucent>
-  <ion-toolbar>
-      <ion-buttons slot="start">
-      <ion-button (click)="closeModal()">
-        <ion-icon slot="icon-only" name="log-out"></ion-icon>
-      </ion-button>
+ <ion-header>
+  <ion-toolbar color="medium">
+    <ion-buttons slot="start">
+      <ion-back-button (click)="closeModal()"></ion-back-button>
     </ion-buttons>
-    <ion-title>Journey Details</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
+<h5>Journey Details</h5>
   <ion-list>
     <ion-item>
       <ion-avatar slot="start">
         <img src={{profilepic}} alt="prof pic">
       </ion-avatar>
-      <ion-label>
-        <h2>{{username}}</h2>
-        <h3>{{recordtime}}</h3>
-      </ion-label>
+      <h6>Name: {{username}}</h6>
     </ion-item>
 
     </ion-list>
     <ion-grid>
       <ion-row>
         <ion-col text-center>
-          <h5>Journey: {{ tripFrom }} To {{ tripTo }}</h5>
-          <h5>
-            <p>Date: {{ dateFrom }} To {{ dateTo }}</p>
-            <p>Pickup time: {{ pickupTime }}</p>
-            <p>Pickup Location: {{ pickupLoc }}</p>
-            <p>Number of Passengers: {{ numberofpassengers }}</p>
-            <p text-align-center>Stops:</p> <p *ngFor="let wp of tripArray.waypoints">{{ wp.point }}</p>
-          </h5>
-          <h5 style="padding-right: 50px;"> {{description}} </h5>
+        
+          <p>Journey: {{ tripFrom }} To {{ tripTo }}</p>
+          <p>Date: {{ dateFrom }} To {{ dateTo }}</p>
+          <p>Pickup time: {{ pickupTime }}</p>
+          <p>Pickup Location: {{ pickupLoc }}</p>
+          <p>Number of Passengers: {{ numberofpassengers }}</p>
+          <p text-align-center>Navigation Points:            
+        
         </ion-col>
       </ion-row>
-      <div *ngIf="isDriver">
         <ion-row>
           <ion-item>
             <ion-input type="text" [(ngModel)]="budget" placeholder="Budget"></ion-input>
           </ion-item>
+          <ion-item>
+            <ion-input type="text" [(ngModel)]="budget" placeholder="More Description"></ion-input>
+          </ion-item>
         </ion-row>
         <ion-row>
         <ion-col text-center>
-            <ion-button (click)="closeModal()" >Submit Budget</ion-button>
+            <ion-button color="medium" (click)="closeModal()" >Apply this Trip</ion-button>
           </ion-col>
         </ion-row>
-      </div>
+      
     </ion-grid>
   </ion-content>

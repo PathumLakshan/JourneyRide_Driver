@@ -1,7 +1,14 @@
-   
-  #map {
-    width: 100%;
-    height: 70vh;
-    position: relative;
-    border: 1px solid red;
+h5 {
+  text-align: center !important;
+}
+
+ion-card  {
+  border-radius: 2em;
+  padding-bottom: 1em !important;
+
+  background: #BFDFC7 !important;
+  p {
+    font-size: 0.8em;
+    text-align: left !important;
+  }
 }

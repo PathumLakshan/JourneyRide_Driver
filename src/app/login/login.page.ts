@@ -21,7 +21,7 @@ export class LoginPage implements OnInit {
   onSubmit(value) {
     console.log(value);
     if (value) {
-      this.navctrl.navigateForward('');
+      this.navctrl.navigateForward('/home/tab1');
     }
   }
 

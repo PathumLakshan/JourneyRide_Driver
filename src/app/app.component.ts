@@ -19,12 +19,12 @@ export class AppComponent {
       icon: 'home'
     },
     {
-      title: 'Schedue',
+      title: 'Available Trips For You',
       url: '/home/tab2',
       icon: 'list'
     },
     {
-      title: 'Location',
+      title: 'Accepted Trips',
       url: '/home/tab3',
       icon: 'contacts'
     }
@@ -37,13 +37,24 @@ export class AppComponent {
     private router: Router
   ) {
     this.initializeApp();
+    this.platform = platform;
   }
-
+  backButtonSubscription;
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       this.router.navigate(['login']);
     });
+  }
+
+  exit() {
+    this.backButtonSubscription = this.platform.backButton.subscribe(() => {
+      navigator[`app`].exitApp();
+    });
+  }
+
+  logoutButton() {
+    alert('Are you sure !')
   }
 }

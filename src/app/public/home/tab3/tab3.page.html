@@ -4,16 +4,27 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title text-center>Passenger's Location</ion-title>
+    <ion-buttons slot="end">
+      <ion-back-button defaultHref="/home/tab1"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 
 <ion-content>
-<ion-fab vertical="top" horizontal="end" slot="fixed" (click)="currentPlace()">
-    <ion-fab-button>
-      <ion-icon name="pin"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
-  <div id="map" style="height: 100%;"></div>
+<h5>Accepted Trips</h5>
+<ion-card *ngFor="let psg of passengerNotes.passengernote" (click)="presentModal(psg.passengerId)"> 
+<ion-card-content>
+<ion-grid>
+  <ion-row>
+    <ion-col>
+      <ion-avatar><img src={{psg.prof_pic}}></ion-avatar>
+    </ion-col>
+    <ion-col>
+      <p>Passenger Name: {{psg.psgName}} </p>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+</ion-card-content>
+</ion-card>
 </ion-content>
