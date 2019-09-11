@@ -5,12 +5,12 @@ import { RouteReuseStrategy } from '@angular/router';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-
+import { IonicStorageModule } from '@ionic/storage';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { TripDetailsModalPageModule } from './public/trip-details-modal/trip-details-modal.module';
+// import { AuthGuardService } from './services/authguard/auth-guard.service';
 
-import { HTTP } from '@ionic-native/http/ngx';
 
 import { HttpClient } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
@@ -23,6 +23,7 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
+    IonicStorageModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
     TripDetailsModalPageModule
@@ -33,8 +34,7 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     GoogleMaps,
     Geolocation,
-    HttpClient,
-    HTTP
+    HttpClient
   ],
   bootstrap: [AppComponent]
 })

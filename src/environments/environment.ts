@@ -4,8 +4,7 @@
 
 export const environment = {
   production: false,
-  url: 'https://finalprojectjr.pythonanywhere.com',
-  header: 'q#x14bp%od6dpxf)4h#w2_p#f@z^6q33^dgfymes3fxv59@fg_'
+  url: 'https://dirtbike.website/bll/'
 };
 // q#x14bp%od6dpxf)4h#w2_p#f@z^6q33^dgfymes3fxv59@fg_
 /*

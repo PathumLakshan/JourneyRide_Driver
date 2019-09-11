@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { LoadingController, ModalController } from '@ionic/angular';
 // ionic native
 import { environment } from '../../../../environments/environment';
-import { HTTP } from '@ionic-native/http/ngx';
+
 import { Location } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { TripDetailsModalPage } from '../../../public/trip-details-modal/trip-details-modal.page';
@@ -183,13 +183,10 @@ export class Tab3Page implements OnInit {
 
 
   URL    =  environment.url + '/pass/list_passenger';
-  HEADER = environment.header;
-
   result: any = [];
   var2: any;
 
-  constructor(private nativeHttp: HTTP,
-              private http: HttpClient,
+  constructor(private http: HttpClient,
               private location: Location,
               private loadingController: LoadingController,
               private modalController: ModalController) { }
@@ -222,6 +219,7 @@ export class Tab3Page implements OnInit {
       translucent: true,
       cssClass: 'custom-class custom-loading'
     });
+    
     await loading.present();
 
     return this.http.get(this.URL).pipe(
@@ -230,21 +228,8 @@ export class Tab3Page implements OnInit {
       (res) => {
         this.var2 = res[1].email;
       },
-      (err) => { alert(err.message);}
+      (err) => { alert(err.message); }
     );
-  }
-
-  async getDataNativeHttp() {
-    const loading = await this.loadingController.create();
-    await loading.present();
-    from(this.nativeHttp.get(this.URL, {}, {})).pipe(
-      finalize(() => loading.dismiss())
-    ).subscribe(
-      data => { this.var2 = data[0].email,
-                alert(data[0].email);
-              },
-     err => { console.log('Native Call error: ', err); }
-     );
   }
 
 }

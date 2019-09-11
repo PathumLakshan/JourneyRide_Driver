@@ -4,18 +4,28 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router } from '@angular/router';
+import { StorageService } from '../app/services/storage/storage.service';
+
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../environments/environment';
+
 
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss']
 })
+
+const URL = environment.url + 'bll/owner/available_trips.php';
+
 export class AppComponent {
+
+  ownerId: number;
 
   public appPages = [
     {
       title: 'Home',
-      url: '/home',
+      url: '/home/tab1',
       icon: 'home'
     },
     {
@@ -34,7 +44,9 @@ export class AppComponent {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private router: Router
+    private router: Router,
+    private storageService: StorageService,
+    private httpService: HttpClient
   ) {
     this.initializeApp();
     this.platform = platform;
@@ -46,6 +58,7 @@ export class AppComponent {
       this.splashScreen.hide();
       this.router.navigate(['login']);
     });
+    this.loadInitialData();
   }
 
   exit() {
@@ -55,6 +68,13 @@ export class AppComponent {
   }
 
   logoutButton() {
-    alert('Are you sure !')
+    alert('Are you sure !');
+  }
+
+  loadInitialData() {
+    this.ownerId = 62;
+    this.httpService.post(URL, this.ownerId).subscribe((res) => {
+      console.log(res);
+    });
   }
 }
