@@ -1,162 +1,113 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { TripDetailsModalPage } from '../../../public/trip-details-modal/trip-details-modal.page';
+import { environment } from 'src/environments/environment';
+import { HttpClient } from '@angular/common/http';
+import { StorageService } from '../../../services/storage/storage.service';
 
 @Component({
   selector: 'app-tab2',
   templateUrl: './tab2.page.html',
   styleUrls: ['./tab2.page.scss'],
 })
+
 export class Tab2Page {
-
-  users = {
-    user: [
-      {
-        userid: 0,
-        username: 'Chester Benington',
-        profilepic: 'assets/lg1.jpg',
-        recordtime: '2019/08/05 17:00 pm',
-      },
-      {
-        userid: 1,
-        username: 'Mike Shinoda',
-        profilepic: 'assets/lg2.jpg',
-        recordtime: '2019/09/10 12:00 pm',
-      },
-      {
-        userid: 2,
-        username: 'Rob Bourdon',
-        profilepic: 'assets/lg3.jpg',
-        recordtime: '2019/11/18 19:00 pm',
-      }
-    ]
-  };
-
-  tripdetails = {
-    trip: [
-      {
-        tripid: 0,
-        trip_from: 'Kandy',
-        trip_to: 'Colombo',
-        date_from: '2019/08/06',
-        date_to: '2019/08/09',
-        pickup_time: '14:00',
-        pickup_loc: '18:00',
-        passengerscount: 5,
-        description: 'This is simple description one',
-        waypoints: [
-          {
-            id: 0,
-            point: 'Peradeniya'
-          },
-          {
-            id: 1,
-            point: 'Kegalle'
-          },
-          {
-            id: 2,
-            point: 'Gampaha'
-          },
-          {
-            id: 3,
-            point: 'Kelaniya'
-          },
-          {
-            id: 4,
-            point: 'Kaduwela'
-          }
-        ]
-      },
-      {
-        tripid: 1,
-        trip_from: 'Kandy',
-        trip_to: 'Gampola',
-        date_from: '2019/09/10',
-        date_to: '2019/09/15',
-        pickup_time: '16:00',
-        pickup_loc: '19:00',
-        passengerscount: 5,
-        description: 'This is simple description two',
-        waypoints: [
-          {
-            id: 0,
-            point: 'Peradeniya'
-          },
-          {
-            id: 1,
-            point: 'Gelioya'
-          },
-          {
-            id: 2,
-            point: 'Veligalla'
-          }
-        ]
-      },
-      {
-        tripid: 2,
-        trip_from: 'Kandy',
-        trip_to: 'Matara',
-        date_from: '2019/10/08',
-        date_to: '2019/10/12',
-        pickup_time: '18:00',
-        pickup_loc: '20:00',
-        passengerscount: 5,
-        description: 'This is simple description three',
-        waypoints: [
-          {
-            id: 0,
-            point: 'Kegalle'
-          },
-          {
-            id: 1,
-            point: 'Gampaha'
-          },
-          {
-            id: 2,
-            point: 'Colombo'
-          },
-          {
-            id: 3,
-            point: 'Panadura'
-          },
-          {
-            id: 4,
-            point: 'Kalutara'
-          },
-          {
-            id: 5,
-            point: 'Galle'
-          },
-          {
-            id: 6,
-            point: 'Matara'
-          }
-        ]
-      }
-    ]
-  };
-
+  
+  URL = environment.url;
+  
+  tripdetail: any = [];
+  tripdetails: any = [];
   dataRet: any;
+  result_array: any = [];
+ 
+  budgetDetails: any;
+  tripId: number;
+  ownerId: number;
+  notificationId: number;
 
-  constructor(private modalController: ModalController) {}
+  constructor(private modalController: ModalController,
+              private httpService: HttpClient,
+              private storage: StorageService) {
+                
+                this.storage.getStorageData('ownerId').then((res) => {
+                  this.loadInitialData(res);
+               });
+
+  }
 
   async presentModal(id) {
+    this.tripId = this.tripdetail[`tripId`];
+    this.ownerId = this.tripdetail[`owner_id`];
+    this.notificationId = this.tripdetail[`notification_id`];
+
+    console.log(this.ownerId,this.notificationId,this.tripId);
 
     const modal = await this.modalController.create({
       component: TripDetailsModalPage,
       componentProps: {
-        userArray : this.users.user[id],
-        tripArray : this.tripdetails.trip[id]
+        tripArray : this.tripdetails
       }
     });
 
     modal.onDidDismiss().then((dataRet) => {
       if (dataRet !== null) {
+
         this.dataRet = dataRet.data;
+
+        console.log(this.ownerId,this.notificationId,this.tripId)
+
+        const budgetDetail = {
+            trip_id: this.tripId,
+            owner_id: this.ownerId,
+            budget: this.dataRet,
+            notification_id: this.notificationId
+        }
+
+        console.log(budgetDetail);
+        this.budgetDetails = JSON.stringify(budgetDetail);
+        console.log(this.budgetDetails);
+
+
+        this.httpService.post(this.URL + 'owner/send_budget_details.php',this.budgetDetails).subscribe((res) => {
+          console.log(res);
+        })
       }
     })
+
     return await modal.present();
   }
 
 
+  loadInitialData(id) {
+    console.log(id)
+    const param: any = {owner_id: 7};
+    this.httpService.get(this.URL + 'owner/available_trips.php', { params: param})
+        .subscribe((res) => {
+          console.log(res)
+          this.result_array = JSON.stringify(res);
+          console.log(this.result_array);
+
+          Array.from(this.result_array).forEach((element, index) => {
+            this.tripdetail[`tripId`] = element[`tripId`],
+            this.tripdetail[`arrivalDate`] = element[`arrivalDate`],
+            this.tripdetail[`departureDate`] = element[`departureDate`],
+            this.tripdetail[`numberOfPassenger`] = element[`numberOfPassenger`],
+            this.tripdetail[`startLocation`] = element[`startLocation`],
+            this.tripdetail[`travelLocation`] = element[`travelLocation`],
+            this.tripdetail[`tripDescription`] = element[`tripDescription`],
+            this.tripdetail[`wayPoint`] = element[`wayPoint`],
+            this.tripdetail[`owner_id`] = element[`ownerId`]
+            this.tripdetail[`notification_id`] = element[`notificationId`]
+
+          });
+
+          this.tripdetails.push(Object.assign([], this.tripdetail));
+        });
+  }
+
+  getOwnerId() {
+     
+  }
+
 }
+

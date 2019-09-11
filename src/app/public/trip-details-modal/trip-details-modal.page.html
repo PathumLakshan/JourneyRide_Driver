@@ -9,34 +9,20 @@
 
 <ion-content padding>
 <h5>Journey Details</h5>
-  <ion-list>
-    <ion-item>
-      <ion-avatar slot="start">
-        <img src={{profilepic}} alt="prof pic">
-      </ion-avatar>
-      <h6>Name: {{username}}</h6>
-    </ion-item>
-
-    </ion-list>
     <ion-grid>
       <ion-row>
         <ion-col text-center>
-        
           <p>Journey: {{ tripFrom }} To {{ tripTo }}</p>
           <p>Date: {{ dateFrom }} To {{ dateTo }}</p>
           <p>Pickup time: {{ pickupTime }}</p>
           <p>Pickup Location: {{ pickupLoc }}</p>
           <p>Number of Passengers: {{ numberofpassengers }}</p>
-          <p text-align-center>Navigation Points:            
-        
+          <p>Description : {{ description }}</p>
         </ion-col>
       </ion-row>
         <ion-row>
           <ion-item>
             <ion-input type="text" [(ngModel)]="budget" placeholder="Budget"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-input type="text" [(ngModel)]="budget" placeholder="More Description"></ion-input>
           </ion-item>
         </ion-row>
         <ion-row>

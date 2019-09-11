@@ -15,13 +15,17 @@
  <ion-grid>
   <ion-row >
     <ion-col align-self-center>
-      <ion-card *ngFor="let item of tripdetails.trip" (click)="presentModal(item.tripid)">
-        <h6 class="list-items">
-          <p>{{ item.trip_from }} To {{ item.trip_to }}</p>
-          <p>Start Date: {{ item.date_from }} </p> 
-          <p>End Date: {{ item.date_to }} </p>
-        </h6>
+      <ion-card *ngFor="let item of tripdetails" (click)="presentModal(item.tripid)">
+        <h5 class="list-items">
+          <p>{{ item.startLocation }} To {{ item.travelLocation }}</p>
+          <p>Start Date: {{ item.departureDate }} </p> 
+          <p>End Date: {{ item.arrivalDate }} </p>
+          <p>Waypoint: {{ item.wayPoint }}</p>
+          <p>Trip Description: {{ item.tripDescription }}</p>
+
+        </h5>
       </ion-card>
+      
     </ion-col>
   </ion-row>
 </ion-grid>

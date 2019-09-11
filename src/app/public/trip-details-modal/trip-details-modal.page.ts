@@ -32,10 +32,6 @@ export class TripDetailsModalPage implements OnInit {
   budget: any;
   onClosedData: string;
 
-  // Driver or company employee
-  // if drier with one vehicle isDriver = true else false
-  isDriver = false;
-
   constructor(
     private modalController: ModalController,
     private navParams: NavParams,
@@ -43,35 +39,25 @@ export class TripDetailsModalPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    
+    this.tripFrom           = this.navParams.data.tripArray[0][`startLocation`];
+    this.tripTo             = this.navParams.data.tripArray[0][`travelLocation`];
+    this.dateFrom           = this.navParams.data.tripArray[0][`departureDate`];
+    this.dateTo             = this.navParams.data.tripArray[0][`arrivalDate`];
+    this.pickupLoc          = this.navParams.data.tripArray[0][`startLocation`];
+    this.numberofpassengers = this.navParams.data.tripArray[0][`numberOfPassenger`];
+    this.waypoints          = this.navParams.data.tripArray[0][`wayPoint`];
+    this.description        = this.navParams.data.tripArray[0][`tripDescription`];
 
-    this.username   = this.navParams.data.userArray[`username`];
-    this.profilepic = this.navParams.data.userArray[`profilepic`];
-    this.recordtime = this.navParams.data.userArray[`recordtime`];
-
-    this.tripFrom           = this.navParams.data.tripArray[`trip_from`];
-    this.tripTo             = this.navParams.data.tripArray[`trip_to`];
-    this.dateFrom           = this.navParams.data.tripArray[`date_from`];
-    this.dateTo             = this.navParams.data.tripArray[`date_to`];
-    this.pickupTime         = this.navParams.data.tripArray[`pickup_time`];
-    this.pickupLoc          = this.navParams.data.tripArray[`pickup_loc`];
-    this.numberofpassengers = this.navParams.data.tripArray[`passengerscount`];
-    this.waypoints          = this.navParams.data.tripArray.waypoints;
-    this.description        = this.navParams.data.tripArray[`description`];
+    console.log(this.navParams.data.tripArray)
   }
 
   async closeModal() {
-    this.sendbudget();
-    this.onClosedData = 'Wrapped Up !';
+    this.onClosedData = this.budget;
     await this.modalController.dismiss(this.onClosedData);
   }
 
-  sendbudget() {
-    // send the estimated budget to Passenger
-    console.log(this.budget);
-  }
-
   navBack() {
-    alert('a');
     this.navCtrl.navigateBack('/home/tab1');
   }
 

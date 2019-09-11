@@ -8,8 +8,6 @@ import { Location } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { TripDetailsModalPage } from '../../../public/trip-details-modal/trip-details-modal.page';
 
-
-// rxjs
 import { from } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 
@@ -21,6 +19,9 @@ import { finalize } from 'rxjs/operators';
 })
 export class Tab3Page implements OnInit {
   dataRet: any;
+  
+  userId: number;
+  tripId: number;
 
   passengerNotes = {
     passengernote: [

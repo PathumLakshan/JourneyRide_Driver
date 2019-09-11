@@ -9,14 +9,13 @@ import { IonicStorageModule } from '@ionic/storage';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { TripDetailsModalPageModule } from './public/trip-details-modal/trip-details-modal.module';
-// import { AuthGuardService } from './services/authguard/auth-guard.service';
+import { AuthGuardService } from './services/authguard/auth-guard.service';
+import { GAuthenticateService } from './services/g-auth/gauthentication.service';
 
 
 import { HttpClient } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 
-import { GoogleMaps } from '@ionic-native/google-maps';
-import { Geolocation } from '@ionic-native/geolocation/ngx';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -32,9 +31,9 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    GoogleMaps,
-    Geolocation,
-    HttpClient
+    HttpClient,
+    GAuthenticateService,
+    AuthGuardService
   ],
   bootstrap: [AppComponent]
 })
